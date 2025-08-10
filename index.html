@@ -14,6 +14,7 @@
             --border-color: #e0e0e0;
             --hover-color: #f1f1f1;
             --footer-bg: rgba(241, 241, 241, 0.9);
+            --mod-color: #9C27B0;
         }
 
         .dark-mode {
@@ -25,6 +26,7 @@
             --border-color: #333333;
             --hover-color: #2a2a2a;
             --footer-bg: rgba(26, 26, 26, 0.9);
+            --mod-color: #BA68C8;
         }
 
         body {
@@ -164,6 +166,10 @@
             backdrop-filter: blur(5px);
         }
 
+        .mod-box {
+            border-left: 4px solid var(--mod-color);
+        }
+
         .info-box:hover {
             transform: translateY(-5px);
         }
@@ -189,6 +195,10 @@
             word-break: break-all;
         }
 
+        .mod-address {
+            color: var(--mod-color);
+        }
+
         .qq-number {
             font-size: 1.2em;
             font-weight: bold;
@@ -199,6 +209,10 @@
         .version {
             color: #FF9800;
             font-weight: bold;
+        }
+
+        .mod-version {
+            color: var(--mod-color);
         }
 
         .note {
@@ -250,7 +264,7 @@
         <div class="announcement">
             <h2>服务器公告</h2>
             <p>欢迎来到闲鱼MC服务器！请遵守服务器规则，文明游戏。</p>
-            <p>服务器维护时间：群内会通知</p>
+            <p>服务器维护时间：每周三凌晨2:00-4:00</p>
         </div>
 
         <div class="server-info">
@@ -271,6 +285,13 @@
                 <h2>官方2b2t服务器</h2>
                 <p class="server-address">mc.2b2t.ren:29870</p>
                 <p>版本: <span class="version">Java 1.21.1</span></p>
+            </div>
+
+            <div class="info-box mod-box">
+                <h2>官方Mod服务器</h2>
+                <p class="server-address mod-address">68.79.24.249:23946</p>
+                <p>版本: <span class="mod-version">fadricmod 1.21.1</span></p>
+                <p class="note">需要专用Mod整合包，请到QQ群群文件下载</p>
             </div>
         </div>
 
