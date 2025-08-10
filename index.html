@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>闲鱼MC服务器</title>
+    <style>
+        :root {
+            --primary-color: #FFD700;
+            --secondary-color: #4CAF50;
+            --text-color: #333333;
+            --bg-color: rgba(255, 255, 255, 0.9);
+            --card-bg: rgba(248, 249, 250, 0.9);
+            --border-color: #e0e0e0;
+            --hover-color: #f1f1f1;
+            --footer-bg: rgba(241, 241, 241, 0.9);
+        }
+
+        .dark-mode {
+            --primary-color: #FFD700;
+            --secondary-color: #4CAF50;
+            --text-color: #e0e0e0;
+            --bg-color: rgba(18, 18, 18, 0.9);
+            --card-bg: rgba(30, 30, 30, 0.9);
+            --border-color: #333333;
+            --hover-color: #2a2a2a;
+            --footer-bg: rgba(26, 26, 26, 0.9);
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            transition: all 0.3s ease;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+            background-image: url('https://pan.ltfxb.top/view.php?a42d7704fec09defd9e4b5efd840d2e1.webp');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.7);
+            z-index: -1;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode::before {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 2.2em;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .theme-switch {
+            display: flex;
+            align-items: center;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+            margin-left: 10px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .announcement {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border-left: 4px solid var(--primary-color);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        .announcement h2 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+
+        .server-info {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .info-box {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--secondary-color);
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        .info-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .qq-group {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #12B7F5;
+            backdrop-filter: blur(5px);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+
+        .server-address {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: var(--secondary-color);
+            margin: 10px 0;
+            word-break: break-all;
+        }
+
+        .qq-number {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #12B7F5;
+            margin: 10px 0;
+        }
+
+        .version {
+            color: #FF9800;
+            font-weight: bold;
+        }
+
+        .note {
+            color: #FF6B6B;
+            font-style: italic;
+            margin-top: 10px;
+        }
+
+        footer {
+            margin-top: 40px;
+            padding: 20px;
+            text-align: center;
+            color: var(--text-color);
+            background-color: var(--footer-bg);
+            border-radius: 10px;
+            font-size: 0.9em;
+            backdrop-filter: blur(5px);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .theme-switch {
+                margin-top: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>闲鱼MC服务器</h1>
+            <div class="theme-switch">
+                <span>暗色模式</span>
+                <label class="switch">
+                    <input type="checkbox" id="themeToggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </header>
+
+        <div class="announcement">
+            <h2>服务器公告</h2>
+            <p>欢迎来到闲鱼MC服务器！请遵守服务器规则，文明游戏。</p>
+            <p>服务器维护时间：群内会通知</p>
+        </div>
+
+        <div class="server-info">
+            <div class="qq-group">
+                <h2>官方QQ交流群</h2>
+                <p class="server-address">634635013</p>
+                <p class="qq-number">群主QQ：3295977308</p>
+                <p>所有服务器资源请在群文件下载</p>
+            </div>
+
+            <div class="info-box">
+                <h2>官方枪械服务器</h2>
+                <p class="server-address">mm.rainplay.cn:27735</p>
+                <p class="note">需要官方专用整合包，请到QQ群群文件下载</p>
+            </div>
+
+            <div class="info-box">
+                <h2>官方2b2t服务器</h2>
+                <p class="server-address">mc.2b2t.ren:29870</p>
+                <p>版本: <span class="version">Java 1.21.1</span></p>
+            </div>
+        </div>
+
+        <footer>
+            <p>©️2025 bochao 版权所有 | 闲鱼MC服务器</p>
+        </footer>
+    </div>
+
+    <script>
+        // 暗色模式切换
+        const themeToggle = document.getElementById('themeToggle');
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+        // 检查本地存储或系统偏好
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && prefersDarkScheme.matches)) {
+            document.body.classList.add('dark-mode');
+            themeToggle.checked = true;
+        }
+
+        // 切换主题
+        themeToggle.addEventListener('change', function() {
+            if (this.checked) {
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // 确保内容立即显示
+        document.body.style.display = 'block';
+    </script>
+</body>
+</html>
