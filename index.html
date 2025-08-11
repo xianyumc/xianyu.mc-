@@ -232,6 +232,29 @@
             backdrop-filter: blur(5px);
         }
 
+        /* 修改点击特效样式 */
+        .click-effect {
+            position: fixed;
+            pointer-events: none;
+            font-size: 18px;
+            font-weight: bold;
+            animation: floatUp 1.5s ease-out forwards;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            z-index: 100;
+            user-select: none;
+        }
+        
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-80px);
+            }
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 15px;
@@ -276,13 +299,13 @@
             </div>
 
             <div class="info-box">
-                <h2>官方枪械服务器</h2>
+                <h2>官方枪械服务器（容易炸</h2>
                 <p class="server-address">mm.rainplay.cn:27735</p>
                 <p class="note">需要官方专用整合包，请到QQ群群文件下载</p>
             </div>
 
             <div class="info-box">
-                <h2>官方2b2t服务器</h2>
+                <h2>官方2b2t服务器（维护中</h2>
                 <p class="server-address">mc.2b2t.ren:29870</p>
                 <p>版本: <span class="version">Java 1.21.1</span></p>
             </div>
@@ -290,7 +313,7 @@
             <div class="info-box mod-box">
                 <h2>官方Mod服务器</h2>
                 <p class="server-address mod-address">68.79.24.249:23946</p>
-                <p>版本: <span class="mod-version">fadricmod 1.21.1</span></p>
+                <p>版本: <span class="mod-version">fabric mod 1.21</span></p>
                 <p class="note">需要专用Mod整合包，请到QQ群群文件下载</p>
             </div>
         </div>
@@ -324,6 +347,34 @@
 
         // 确保内容立即显示
         document.body.style.display = 'block';
+
+        // 修改点击特效
+        const values = ["富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善"];
+        let currentIndex = 0;
+        
+        document.addEventListener('click', function(e) {
+            const effect = document.createElement('div');
+            effect.className = 'click-effect';
+            effect.textContent = values[currentIndex];
+            effect.style.left = (e.pageX - 20) + 'px';
+            effect.style.top = (e.pageY - 20) + 'px';
+            effect.style.color = getRandomColor();
+            
+            document.body.appendChild(effect);
+            
+            // 更新索引，循环显示
+            currentIndex = (currentIndex + 1) % values.length;
+            
+            // 动画结束后移除元素
+            setTimeout(() => {
+                effect.remove();
+            }, 1500);
+        });
+        
+        function getRandomColor() {
+            const colors = ['#FF5252', '#FF4081', '#E040FB', '#7C4DFF', '#536DFE', '#448AFF', '#40C4FF', '#18FFFF', '#64FFDA', '#69F0AE', '#B2FF59', '#EEFF41', '#FFFF00'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
     </script>
 </body>
 </html>
